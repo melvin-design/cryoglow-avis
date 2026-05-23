@@ -1,3 +1,3 @@
 User-agent: *
 Allow: /
-Sitemap: https://avis-shark-cryoglow.fr/sitemap.xml
+Sitemap: https://shark-cryoglow-avis.fr/sitemap.xml
