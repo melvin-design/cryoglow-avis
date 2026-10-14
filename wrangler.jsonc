@@ -1,0 +1,10 @@
+{
+  // Généré par outils-build/build.mjs : ne pas modifier à la main.
+  "name": "square-sound-9c2d",
+  "compatibility_date": "2026-05-23",
+  "assets": {
+    "directory": ".",
+    "not_found_handling": "404-page",
+    "html_handling": "auto-trailing-slash"
+  }
+}
