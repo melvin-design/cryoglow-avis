@@ -25,7 +25,7 @@
     <meta name="twitter:image" content="https://shark-cryoglow-avis.fr/og-shark-cryoglow-avis.png">
     <meta name="twitter:image:alt" content="Shark CryoGlow Avis : le masque LED Shark CryoGlow, avis et caractéristiques vérifiées">
     <link rel="preload" href="/fonts/manrope-latin.woff2" as="font" type="font/woff2" crossorigin>
-    <link rel="stylesheet" href="/styles.css?v=65bcf8a4">
+    <link rel="stylesheet" href="/styles.css?v=912c1c9d">
     <link rel="apple-touch-icon" href="/logo-shark-cryoglow-avis.png">
     <script type="application/ld+json">
 {
@@ -146,12 +146,15 @@
 
 <section class="section-light">
     <div class="container prose has-toc">
-        <aside class="toc" aria-label="Sommaire">
-            <span class="eyebrow">Sommaire</span>
-            <a href="#emilie-roche-redactrice-et-directrice-de-la-publication" class="is-first">Émilie Roche, rédactrice et directrice de la publication</a>
+        <aside class="toc" id="toc" aria-label="Sommaire">
+            <span class="eyebrow toc-title">Sommaire</span>
+            <button type="button" class="toc-toggle" aria-expanded="false" aria-controls="toc-links">Sommaire <span aria-hidden="true">4 parties</span></button>
+            <div class="toc-links" id="toc-links">
+            <a href="#emilie-roche-redactrice-et-directrice-de-la-publication">Émilie Roche, rédactrice et directrice de la publication</a>
             <a href="#ce-que-nous-faisons-et-ce-que-nous-ne-faisons-pas">Ce que nous faisons, et ce que nous ne faisons pas</a>
             <a href="#comment-le-site-est-finance">Comment le site est financé</a>
             <a href="#pour-aller-plus-loin">Pour aller plus loin</a>
+            </div>
         </aside>
         <h2 id="emilie-roche-redactrice-et-directrice-de-la-publication">Émilie Roche, rédactrice et directrice de la publication</h2>
         <!-- À COMPLÉTER par Émilie Roche : parcours réel, lien vers un profil public (LinkedIn, etc.), photo. Ne rien inventer. -->
@@ -239,6 +242,19 @@
             if (!isActive) { item.classList.add('active'); question.setAttribute('aria-expanded', 'true'); }
         });
     });
+    // Sommaire replié sur mobile : ouverture au clic, fermeture après le choix d'une partie.
+    const toc = document.getElementById('toc');
+    const tocToggle = toc && toc.querySelector('.toc-toggle');
+    if (tocToggle) {
+        tocToggle.addEventListener('click', () => {
+            const open = toc.classList.toggle('toc-open');
+            tocToggle.setAttribute('aria-expanded', open);
+        });
+        toc.querySelectorAll('.toc-links a').forEach(a => a.addEventListener('click', () => {
+            toc.classList.remove('toc-open');
+            tocToggle.setAttribute('aria-expanded', 'false');
+        }));
+    }
     // Sommaire : met en évidence la section en cours de lecture.
     const tocLinks = [...document.querySelectorAll('.toc a')];
     if (tocLinks.length) {

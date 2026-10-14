@@ -25,7 +25,7 @@
     <meta name="twitter:image" content="https://shark-cryoglow-avis.fr/og-shark-cryoglow-avis.png">
     <meta name="twitter:image:alt" content="Shark CryoGlow Avis : le masque LED Shark CryoGlow, avis et caractéristiques vérifiées">
     <link rel="preload" href="/fonts/manrope-latin.woff2" as="font" type="font/woff2" crossorigin>
-    <link rel="stylesheet" href="/styles.css?v=65bcf8a4">
+    <link rel="stylesheet" href="/styles.css?v=912c1c9d">
     <link rel="apple-touch-icon" href="/logo-shark-cryoglow-avis.png">
     <script type="application/ld+json">
 {
@@ -146,15 +146,18 @@
 
 <section class="section-light">
     <div class="container prose has-toc">
-        <aside class="toc" aria-label="Sommaire">
-            <span class="eyebrow">Sommaire</span>
-            <a href="#essentiel" class="is-first">L'essentiel</a>
+        <aside class="toc" id="toc" aria-label="Sommaire">
+            <span class="eyebrow toc-title">Sommaire</span>
+            <button type="button" class="toc-toggle" aria-expanded="false" aria-controls="toc-links">Sommaire <span aria-hidden="true">7 parties</span></button>
+            <div class="toc-links" id="toc-links">
+            <a href="#essentiel">L'essentiel</a>
             <a href="#combien-pese-le-shark-cryoglow-les-chiffres-publies">Combien pèse le Shark CryoGlow ? Les chiffres publiés</a>
             <a href="#pourquoi-il-est-plus-lourd-qu-un-masque-led-classique">Pourquoi il est plus lourd qu'un masque LED classique</a>
             <a href="#ce-que-ca-change-a-l-usage">Ce que ça change à l'usage</a>
             <a href="#nos-conseils-pour-le-porter-confortablement">Nos conseils pour le porter confortablement</a>
             <a href="#verdict-trop-lourd-pour-vous">Verdict : trop lourd pour vous ?</a>
             <a href="#a-lire-aussi">À lire aussi</a>
+            </div>
         </aside>
         <div class="essentials" id="essentiel">
             <span class="chip">L'essentiel</span>
@@ -163,12 +166,12 @@
         <div class="disclosure"><strong>Transparence :</strong> nous n'avons pas testé ce produit en main propre. Cette page est une synthèse des fiches constructeurs, de la notice, de l'étude clinique publiée par Shark et de tests de presse, tous listés sur notre <a href="/sources/">page Sources</a>. Les liens Amazon sont des liens affiliés. <a href="/methodologie/">Voir notre méthode</a>.</div>
         <h2 id="combien-pese-le-shark-cryoglow-les-chiffres-publies">Combien pèse le Shark CryoGlow ? Les chiffres publiés</h2>
         <p>Les sources ne donnent pas toutes le même poids. Plutôt que d'en choisir un, voici les trois, avec ce qu'ils mesurent probablement.</p>
-        <div class="table-scroll"><table>
+        <div class="table-scroll"><table class="table-cards">
             <thead><tr><th>Source</th><th>Poids annoncé</th><th>Ce qui est probablement pesé</th></tr></thead>
             <tbody>
-                <tr><td>Expert Reviews (test de 4 semaines)</td><td><strong>537 g</strong></td><td>Le masque seul</td></tr>
-                <tr><td>L'Éclaireur Fnac</td><td><strong>≈ 680 g</strong></td><td>Non précisé, probablement avec la télécommande filaire</td></tr>
-                <tr><td>Fiche officielle Shark (US)</td><td><strong>1,69 lb, soit ≈ 767 g</strong></td><td>Non précisé, probablement avec accessoires</td></tr>
+                <tr><td data-label="Source">Expert Reviews (test de 4 semaines)</td><td data-label="Poids annoncé"><strong>537 g</strong></td><td data-label="Ce qui est probablement pesé">Le masque seul</td></tr>
+                <tr><td data-label="Source">L'Éclaireur Fnac</td><td data-label="Poids annoncé"><strong>≈ 680 g</strong></td><td data-label="Ce qui est probablement pesé">Non précisé, probablement avec la télécommande filaire</td></tr>
+                <tr><td data-label="Source">Fiche officielle Shark (US)</td><td data-label="Poids annoncé"><strong>1,69 lb, soit ≈ 767 g</strong></td><td data-label="Ce qui est probablement pesé">Non précisé, probablement avec accessoires</td></tr>
             </tbody>
         </table></div>
         <p><em>Correction du 14 octobre 2026 : ce site affichait auparavant 512 g et 704 g, présentés comme une pesée. Aucune source vérifiable ne confirme ces valeurs : nous les avons remplacées par les chiffres ci-dessus.</em></p>
@@ -284,6 +287,19 @@
             if (!isActive) { item.classList.add('active'); question.setAttribute('aria-expanded', 'true'); }
         });
     });
+    // Sommaire replié sur mobile : ouverture au clic, fermeture après le choix d'une partie.
+    const toc = document.getElementById('toc');
+    const tocToggle = toc && toc.querySelector('.toc-toggle');
+    if (tocToggle) {
+        tocToggle.addEventListener('click', () => {
+            const open = toc.classList.toggle('toc-open');
+            tocToggle.setAttribute('aria-expanded', open);
+        });
+        toc.querySelectorAll('.toc-links a').forEach(a => a.addEventListener('click', () => {
+            toc.classList.remove('toc-open');
+            tocToggle.setAttribute('aria-expanded', 'false');
+        }));
+    }
     // Sommaire : met en évidence la section en cours de lecture.
     const tocLinks = [...document.querySelectorAll('.toc a')];
     if (tocLinks.length) {

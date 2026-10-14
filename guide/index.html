@@ -25,7 +25,7 @@
     <meta name="twitter:image" content="https://shark-cryoglow-avis.fr/og-shark-cryoglow-avis.png">
     <meta name="twitter:image:alt" content="Shark CryoGlow Avis : le masque LED Shark CryoGlow, avis et caractéristiques vérifiées">
     <link rel="preload" href="/fonts/manrope-latin.woff2" as="font" type="font/woff2" crossorigin>
-    <link rel="stylesheet" href="/styles.css?v=65bcf8a4">
+    <link rel="stylesheet" href="/styles.css?v=912c1c9d">
     <link rel="apple-touch-icon" href="/logo-shark-cryoglow-avis.png">
     <script type="application/ld+json">
 {
@@ -175,15 +175,18 @@
 
 <section class="section-light">
     <div class="container prose has-toc">
-        <aside class="toc" aria-label="Sommaire">
-            <span class="eyebrow">Sommaire</span>
-            <a href="#essentiel" class="is-first">L'essentiel</a>
+        <aside class="toc" id="toc" aria-label="Sommaire">
+            <span class="eyebrow toc-title">Sommaire</span>
+            <button type="button" class="toc-toggle" aria-expanded="false" aria-controls="toc-links">Sommaire <span aria-hidden="true">7 parties</span></button>
+            <div class="toc-links" id="toc-links">
+            <a href="#essentiel">L'essentiel</a>
             <a href="#utiliser-le-masque-en-4-etapes">Utiliser le masque en 4 étapes</a>
             <a href="#routine">Les 4 programmes et quand les utiliser</a>
             <a href="#une-routine-realiste-matin-et-soir">Une routine réaliste, matin et soir</a>
             <a href="#entretien-et-rangement">Entretien et rangement</a>
             <a href="#science">LED et peau : ce que disent les études indépendantes</a>
             <a href="#questions-frequentes">Questions fréquentes</a>
+            </div>
         </aside>
         <div class="essentials" id="essentiel">
             <span class="chip">L'essentiel</span>
@@ -199,13 +202,13 @@
         </div>
 
         <h2 id="routine">Les 4 programmes et quand les utiliser</h2>
-        <div class="table-scroll"><table>
+        <div class="table-scroll"><table class="table-cards">
             <thead><tr><th>Programme</th><th>Ce qui s'allume</th><th>Durée</th><th>Pour qui</th></tr></thead>
             <tbody>
-                <tr><td>Better Aging</td><td>Rouge + infrarouge</td><td>6 min</td><td>Ridules, fermeté, éclat</td></tr>
-                <tr id="imperfections"><td>Skin Clearing</td><td>Bleu + rouge + infrarouge</td><td>8 min</td><td>Imperfections, texture, pores</td></tr>
-                <tr><td>Skin Sustain</td><td>Bleu + rouge + infrarouge</td><td>4 min</td><td>Entretien, une fois les résultats obtenus</td></tr>
-                <tr id="cryo"><td>Under-Eye Revive</td><td>Froid seul (3 niveaux)</td><td>5 à 15 min</td><td>Poches, regard fatigué</td></tr>
+                <tr><td data-label="Programme">Better Aging</td><td data-label="Ce qui s'allume">Rouge + infrarouge</td><td data-label="Durée">6 min</td><td data-label="Pour qui">Ridules, fermeté, éclat</td></tr>
+                <tr id="imperfections"><td data-label="Programme">Skin Clearing</td><td data-label="Ce qui s'allume">Bleu + rouge + infrarouge</td><td data-label="Durée">8 min</td><td data-label="Pour qui">Imperfections, texture, pores</td></tr>
+                <tr><td data-label="Programme">Skin Sustain</td><td data-label="Ce qui s'allume">Bleu + rouge + infrarouge</td><td data-label="Durée">4 min</td><td data-label="Pour qui">Entretien, une fois les résultats obtenus</td></tr>
+                <tr id="cryo"><td data-label="Programme">Under-Eye Revive</td><td data-label="Ce qui s'allume">Froid seul (3 niveaux)</td><td data-label="Durée">5 à 15 min</td><td data-label="Pour qui">Poches, regard fatigué</td></tr>
             </tbody>
         </table></div>
         <p>Durées : fiche officielle Shark. La notice recommande d'utiliser <strong>le même programme LED une fois par jour pendant au moins 8 semaines</strong>, puis de passer à Skin Sustain, sans enchaîner plusieurs programmes LED le même jour.</p>
@@ -344,6 +347,19 @@
             if (!isActive) { item.classList.add('active'); question.setAttribute('aria-expanded', 'true'); }
         });
     });
+    // Sommaire replié sur mobile : ouverture au clic, fermeture après le choix d'une partie.
+    const toc = document.getElementById('toc');
+    const tocToggle = toc && toc.querySelector('.toc-toggle');
+    if (tocToggle) {
+        tocToggle.addEventListener('click', () => {
+            const open = toc.classList.toggle('toc-open');
+            tocToggle.setAttribute('aria-expanded', open);
+        });
+        toc.querySelectorAll('.toc-links a').forEach(a => a.addEventListener('click', () => {
+            toc.classList.remove('toc-open');
+            tocToggle.setAttribute('aria-expanded', 'false');
+        }));
+    }
     // Sommaire : met en évidence la section en cours de lecture.
     const tocLinks = [...document.querySelectorAll('.toc a')];
     if (tocLinks.length) {

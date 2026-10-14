@@ -25,7 +25,7 @@
     <meta name="twitter:image" content="https://shark-cryoglow-avis.fr/og-shark-cryoglow-avis.png">
     <meta name="twitter:image:alt" content="Shark CryoGlow Avis : le masque LED Shark CryoGlow, avis et caractéristiques vérifiées">
     <link rel="preload" href="/fonts/manrope-latin.woff2" as="font" type="font/woff2" crossorigin>
-    <link rel="stylesheet" href="/styles.css?v=65bcf8a4">
+    <link rel="stylesheet" href="/styles.css?v=912c1c9d">
     <link rel="apple-touch-icon" href="/logo-shark-cryoglow-avis.png">
     <script type="application/ld+json">
 {
@@ -232,6 +232,19 @@
             if (!isActive) { item.classList.add('active'); question.setAttribute('aria-expanded', 'true'); }
         });
     });
+    // Sommaire replié sur mobile : ouverture au clic, fermeture après le choix d'une partie.
+    const toc = document.getElementById('toc');
+    const tocToggle = toc && toc.querySelector('.toc-toggle');
+    if (tocToggle) {
+        tocToggle.addEventListener('click', () => {
+            const open = toc.classList.toggle('toc-open');
+            tocToggle.setAttribute('aria-expanded', open);
+        });
+        toc.querySelectorAll('.toc-links a').forEach(a => a.addEventListener('click', () => {
+            toc.classList.remove('toc-open');
+            tocToggle.setAttribute('aria-expanded', 'false');
+        }));
+    }
     // Sommaire : met en évidence la section en cours de lecture.
     const tocLinks = [...document.querySelectorAll('.toc a')];
     if (tocLinks.length) {

@@ -25,7 +25,7 @@
     <meta name="twitter:image" content="https://shark-cryoglow-avis.fr/og-shark-cryoglow-avis.png">
     <meta name="twitter:image:alt" content="Shark CryoGlow Avis : le masque LED Shark CryoGlow, avis et caractéristiques vérifiées">
     <link rel="preload" href="/fonts/manrope-latin.woff2" as="font" type="font/woff2" crossorigin>
-    <link rel="stylesheet" href="/styles.css?v=65bcf8a4">
+    <link rel="stylesheet" href="/styles.css?v=912c1c9d">
     <link rel="apple-touch-icon" href="/logo-shark-cryoglow-avis.png">
     <script type="application/ld+json">
 {
@@ -152,9 +152,11 @@
 
 <section class="section-light">
     <div class="container prose has-toc">
-        <aside class="toc" aria-label="Sommaire">
-            <span class="eyebrow">Sommaire</span>
-            <a href="#essentiel" class="is-first">L'essentiel</a>
+        <aside class="toc" id="toc" aria-label="Sommaire">
+            <span class="eyebrow toc-title">Sommaire</span>
+            <button type="button" class="toc-toggle" aria-expanded="false" aria-controls="toc-links">Sommaire <span aria-hidden="true">9 parties</span></button>
+            <div class="toc-links" id="toc-links">
+            <a href="#essentiel">L'essentiel</a>
             <a href="#le-verdict-en-30-secondes">Le verdict en 30 secondes</a>
             <a href="#le-comparatif-point-par-point">Le comparatif point par point</a>
             <a href="#le-temps-avantage-dr-dennis-gross">Le temps : avantage Dr Dennis Gross</a>
@@ -163,6 +165,7 @@
             <a href="#poches-et-regard-fatigue-cryoglow">Poches et regard fatigué : CryoGlow</a>
             <a href="#les-precautions-sont-les-memes">Les précautions sont les mêmes</a>
             <a href="#a-lire-aussi">À lire aussi</a>
+            </div>
         </aside>
         <div class="essentials" id="essentiel">
             <span class="chip">L'essentiel</span>
@@ -208,17 +211,17 @@
   </div>
 
         <h2 id="le-comparatif-point-par-point">Le comparatif point par point</h2>
-        <div class="table-scroll"><table>
+        <div class="table-scroll"><table class="table-cards">
             <thead><tr><th>Critère</th><th>Shark CryoGlow</th><th>Dr Dennis Gross DRx SpectraLite FaceWare Pro</th></tr></thead>
             <tbody>
-                <tr><td>LED</td><td>160 tri-wick (480 sources)</td><td>162 : 100 rouges, 62 bleues</td></tr>
-                <tr><td>Couleurs</td><td>Bleu 415, rouge 630, infrarouge 830 nm</td><td>Rouge et bleu (longueurs d'onde non indiquées dans nos sources)</td></tr>
-                <tr><td>Infrarouge</td><td><strong>Oui</strong></td><td>Non mentionné</td></tr>
-                <tr><td>Froid sous les yeux</td><td><strong>Oui</strong>, 3 niveaux</td><td>Non</td></tr>
-                <tr><td>Durée d'une séance</td><td>4, 6 ou 8 min</td><td><strong>3 min</strong></td></tr>
-                <tr><td>Modes</td><td>4 programmes (dont froid seul)</td><td>3 : rouge, bleu, rouge + bleu</td></tr>
-                <tr><td>Statut</td><td>Dispositif médical certifié CE (selon la Fnac)</td><td>« FDA-cleared » aux États-Unis</td></tr>
-                <tr><td>Poids</td><td>537 à ~680 g selon les tests</td><td>Non publié</td></tr>
+                <tr><td data-label="Critère">LED</td><td data-label="Shark CryoGlow">160 tri-wick (480 sources)</td><td data-label="Dr Dennis Gross DRx SpectraLite FaceWare Pro">162 : 100 rouges, 62 bleues</td></tr>
+                <tr><td data-label="Critère">Couleurs</td><td data-label="Shark CryoGlow">Bleu 415, rouge 630, infrarouge 830 nm</td><td data-label="Dr Dennis Gross DRx SpectraLite FaceWare Pro">Rouge et bleu (longueurs d'onde non indiquées dans nos sources)</td></tr>
+                <tr><td data-label="Critère">Infrarouge</td><td data-label="Shark CryoGlow"><strong>Oui</strong></td><td data-label="Dr Dennis Gross DRx SpectraLite FaceWare Pro">Non mentionné</td></tr>
+                <tr><td data-label="Critère">Froid sous les yeux</td><td data-label="Shark CryoGlow"><strong>Oui</strong>, 3 niveaux</td><td data-label="Dr Dennis Gross DRx SpectraLite FaceWare Pro">Non</td></tr>
+                <tr><td data-label="Critère">Durée d'une séance</td><td data-label="Shark CryoGlow">4, 6 ou 8 min</td><td data-label="Dr Dennis Gross DRx SpectraLite FaceWare Pro"><strong>3 min</strong></td></tr>
+                <tr><td data-label="Critère">Modes</td><td data-label="Shark CryoGlow">4 programmes (dont froid seul)</td><td data-label="Dr Dennis Gross DRx SpectraLite FaceWare Pro">3 : rouge, bleu, rouge + bleu</td></tr>
+                <tr><td data-label="Critère">Statut</td><td data-label="Shark CryoGlow">Dispositif médical certifié CE (selon la Fnac)</td><td data-label="Dr Dennis Gross DRx SpectraLite FaceWare Pro">« FDA-cleared » aux États-Unis</td></tr>
+                <tr><td data-label="Critère">Poids</td><td data-label="Shark CryoGlow">537 à ~680 g selon les tests</td><td data-label="Dr Dennis Gross DRx SpectraLite FaceWare Pro">Non publié</td></tr>
             </tbody>
         </table></div>
 
@@ -329,6 +332,19 @@
             if (!isActive) { item.classList.add('active'); question.setAttribute('aria-expanded', 'true'); }
         });
     });
+    // Sommaire replié sur mobile : ouverture au clic, fermeture après le choix d'une partie.
+    const toc = document.getElementById('toc');
+    const tocToggle = toc && toc.querySelector('.toc-toggle');
+    if (tocToggle) {
+        tocToggle.addEventListener('click', () => {
+            const open = toc.classList.toggle('toc-open');
+            tocToggle.setAttribute('aria-expanded', open);
+        });
+        toc.querySelectorAll('.toc-links a').forEach(a => a.addEventListener('click', () => {
+            toc.classList.remove('toc-open');
+            tocToggle.setAttribute('aria-expanded', 'false');
+        }));
+    }
     // Sommaire : met en évidence la section en cours de lecture.
     const tocLinks = [...document.querySelectorAll('.toc a')];
     if (tocLinks.length) {
