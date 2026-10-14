@@ -822,3 +822,26 @@ main { display: block; }
 @media (max-width: 860px) {
     .home > .hero .hero__visual { width: min(100%, 400px); }
 }
+
+/* Accueil : avis d'acheteurs */
+.buyers { display: grid; grid-template-columns: minmax(0, 360px) minmax(0, 1fr); gap: 16px; align-items: start; }
+.buyers__score .card__body { gap: 14px; }
+.buyers__value { font-size: 72px; font-weight: 500; letter-spacing: -.05em; line-height: 1; }
+.buyers__value small { font-size: 22px; color: var(--muted-2); letter-spacing: -.02em; }
+.buyers__meta { font-size: 13px; color: var(--on-dark-2); line-height: 1.5; }
+.buyers__themes { list-style: none; margin: 0; padding: 0; display: flex; flex-direction: column; gap: 12px; font-size: 13px; line-height: 1.55; color: var(--on-dark-2); }
+.buyers__themes li { padding-top: 12px; border-top: 1px solid rgba(255,255,255,.12); }
+.buyers__themes b { display: block; color: var(--white); font-size: 12px; margin-bottom: 2px; }
+.buyers__quotes { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 12px; }
+.quote { margin: 0; background: var(--panel); border-radius: var(--r-lg); padding: 10px; display: flex; flex-direction: column; gap: 10px; }
+.quote .chip { align-items: center; }
+.quote blockquote { margin: 0; padding: 4px 8px 0; font-size: 16px; line-height: 1.5; font-weight: 500; letter-spacing: -.01em; color: var(--ink); }
+.quote figcaption { padding: 0 8px 8px; font-size: 12px; color: var(--muted); margin-top: auto; }
+.stars { color: var(--accent); letter-spacing: 1px; font-size: 13px; white-space: nowrap; }
+.stars span { color: #d4d4d4; }
+.quote--mixed .stars { color: var(--ink); }
+@media (max-width: 960px) { .buyers { grid-template-columns: 1fr; } }
+@media (max-width: 560px) {
+    .buyers__quotes { grid-template-columns: 1fr; }
+    .buyers__value { font-size: 56px; }
+}
