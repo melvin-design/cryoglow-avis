@@ -856,3 +856,62 @@ main { display: block; }
 @media (max-width: 720px) { .duel-links { grid-template-columns: 1fr; } }
 .comp-table th a, .data-table td a { color: inherit; text-decoration: underline; text-decoration-color: var(--accent); text-decoration-thickness: 1.5px; text-underline-offset: 3px; }
 .comp-table th a:hover, .data-table td a:hover { color: var(--accent); }
+
+/* ==========================================================================
+   CTA Amazon : bouton d'achat, encart produit, bouton sous le titre, barre collante
+   ========================================================================== */
+.btn-buy { padding: 16px 22px; font-size: 12px; gap: 10px; box-shadow: 0 8px 24px rgba(255,79,0,.32); transition: background .15s, transform .15s, box-shadow .15s; }
+.btn-buy:hover { transform: translateY(-1px); box-shadow: 0 12px 28px rgba(255,79,0,.4); }
+.btn-buy .icon { width: 15px; height: 15px; }
+
+/* Encart produit */
+.cta-box { grid-template-columns: 140px 1fr; gap: 22px; padding: 12px; border: 1px solid rgba(255,79,0,.35); box-shadow: 0 16px 40px rgba(20,20,20,.12); }
+.cta-box__body { gap: 10px; padding: 8px 12px 8px 0; }
+.cta-box__eyebrow { font-size: 11px; font-weight: 700; letter-spacing: .06em; text-transform: uppercase; color: var(--accent); }
+.cta-box__title { font-size: 24px; letter-spacing: -.02em; }
+.cta-box__checks { list-style: none; margin: 0 !important; padding: 0 !important; display: flex; flex-direction: column; gap: 6px; font-size: 13px; line-height: 1.45; color: var(--on-dark-2); }
+.prose .cta-box__checks li { padding: 0; margin: 0; display: flex; gap: 8px; align-items: flex-start; }
+.prose .cta-box__checks li::before { display: none; }
+.cta-box__checks .icon { color: var(--accent); flex: none; margin-top: 2px; }
+.cta-box .btn-buy { margin-top: 4px; }
+@media (max-width: 720px) {
+    .cta-box { grid-template-columns: 1fr; padding: 10px; }
+    .cta-box__visual { width: 96px; }
+    .cta-box__body { padding: 0 6px 6px; }
+    .cta-box .btn-buy { width: 100%; }
+}
+
+/* Bouton d'achat sous le titre */
+.hero-buy { display: flex; flex-wrap: wrap; align-items: center; gap: 10px 18px; margin-top: 4px; }
+.hero-buy__link { font-size: 13px; font-weight: 700; color: var(--ink); text-decoration: underline; text-decoration-color: var(--accent); text-underline-offset: 3px; }
+.hero-buy .affiliate-note { flex-basis: 100%; margin: 0; }
+@media (max-width: 720px) { .hero-buy .btn-buy { width: 100%; } }
+
+/* Hero de l'accueil */
+.hero__buy { display: flex; flex-direction: column; gap: 10px; }
+.hero__buy .affiliate-note { margin: 0; color: rgba(255,255,255,.55); max-width: 440px; }
+
+/* Barre d'achat collante */
+.buybar {
+    position: fixed; z-index: 50; left: 50%; bottom: 16px; transform: translateX(-50%);
+    width: min(680px, calc(100vw - 24px)); background: var(--ink); color: var(--white); border-radius: 14px;
+    padding: 8px 8px 8px 8px; display: grid; grid-template-columns: 44px minmax(0, 1fr) auto auto; gap: 12px; align-items: center;
+    box-shadow: 0 16px 40px rgba(0,0,0,.28); animation: buybar-in .25s ease;
+}
+.buybar[hidden] { display: none; }
+.buybar img { width: 44px; height: 44px; border-radius: 8px; object-fit: cover; background: var(--white); }
+.buybar__txt { display: flex; flex-direction: column; gap: 2px; min-width: 0; }
+.buybar__txt b { font-size: 14px; }
+.buybar__txt span { font-size: 10px; line-height: 1.35; color: var(--muted-2); }
+.buybar .btn-buy { padding: 13px 16px; box-shadow: none; white-space: nowrap; }
+.buybar__close { width: 32px; height: 32px; border: none; border-radius: 50%; background: rgba(255,255,255,.08); color: var(--white); cursor: pointer; display: flex; align-items: center; justify-content: center; }
+.buybar__close:hover { background: rgba(255,255,255,.16); }
+@keyframes buybar-in { from { opacity: 0; transform: translate(-50%, 12px); } to { opacity: 1; transform: translate(-50%, 0); } }
+@media (max-width: 560px) {
+    .buybar { grid-template-columns: minmax(0, 1fr) auto auto; bottom: 10px; padding: 8px 8px 8px 12px; }
+    .buybar img { display: none; }
+    .buybar .btn-buy { padding: 12px 12px; }
+}
+@media (prefers-reduced-motion: reduce) { .buybar { animation: none; } .btn-buy:hover { transform: none; } }
+/* Les titres de cartes gardent leur taille sur mobile (la règle .prose h3 ne doit pas s'appliquer) */
+.prose .profile-card h3 { font-size: 13px; margin: 0; }
